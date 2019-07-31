@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Register</h1>
+    {% from 'macros/_renderfield.html' import render_form_field %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ render_form_field(form.username) }}
+        </div>
+        <div>
+            {{ render_form_field(form.password) }}
+        </div>
+        <div>
+            {{ render_form_field(form.confirm) }}
+        </div>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

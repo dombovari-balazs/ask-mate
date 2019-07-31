@@ -20,12 +20,12 @@ def get_all_rows(cursor, table_name, order_key, order_type='desc', limit_count='
 
 
 @connection.connection_handler
-def get_single_row(cursor, row_id, table_name, column_name='id'):
+def get_single_row(cursor, row, table_name, column_name='id'):
     cursor.execute(
         sql.SQL("""
                 SELECT * FROM {table}
-                WHERE {column_name} = %(row_id)s;
-    """).format(table=sql.Identifier(table_name), column_name=sql.Identifier(column_name)), {'row_id': row_id})
+                WHERE {column_name} = %(row)s;
+    """).format(table=sql.Identifier(table_name), column_name=sql.Identifier(column_name)), {'row': row})
     single_row = cursor.fetchone()
     return single_row
 
@@ -178,3 +178,5 @@ def get_latest_questions(cursor):
     """)
     questions = cursor.fetchall()
     return questions
+
+

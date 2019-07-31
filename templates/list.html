@@ -7,6 +7,21 @@
 </head>
 <body>
 	<h1>AskMate</h1>
+    <h2>Logged in as {{ user }}</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'logged-in-error' %}
+            <span>{{ message }}</span>
+            <br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% from 'macros/_renderfield.html' import logged_hidden_class, not_logged_hidden_class %}
+    <a class="{{ logged_hidden_class() }}" href="{{ url_for('route_register') }}">Register</a>
+    <a class="{{ logged_hidden_class() }}" href="{{ url_for('route_login') }}">Login</a>
+    <a class="{{ not_logged_hidden_class() }}" href="{{ url_for('route_logout') }}">Logout</a>
     <div class="searchbar">
     <form action="{{ url_for('search_question') }}" method="get">
         <textarea name="q" id="" cols="16" rows="1,5"></textarea>

@@ -1,0 +1,19 @@
+{% macro render_form_field(field) %}
+    {% if field.name != 'submit' %}
+    {{ field.label }}
+    {% endif %}
+    {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span class="input-error">{{ error }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro logged_hidden_class() %}
+{%- if session['user_name'] is defined %}{{ 'hidden' }}{% endif -%}
+{% endmacro %}
+
+{% macro not_logged_hidden_class() %}
+{%- if session['user_name'] is undefined %}{{ 'hidden' }}{% endif -%}
+{% endmacro %}
