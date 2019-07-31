@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<title>Post Answer</title>
-</head>
-<body>
+{% block content %}
+
+
 	<h1>Post your answer</h1>
     <p> ID: {{ q_id }}</p>
     <form method="post">
         <textarea name="new_answer" minlength="10" cols="40" rows="5" required></textarea><br>
         <input type="submit" value="Post answer">
     </form>
-</body>
-</html>
+
+{%endblock%}

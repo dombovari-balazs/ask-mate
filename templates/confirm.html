@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta charset="UTF-8">
-    <title>Confirm</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
+
 <h1>You want to delete this comment?</h1>
 <div class="p3">
     <form action="{{ url_for('delete_comment', comment_id=comment_id) }}" method="post">
@@ -13,5 +9,5 @@
     <button class="button1" formaction="{{ url_for('display_question', question_id=question_id) }}" formmethod="get">No</button>
     </form>
 </div>
-</body>
-</html>
+
+{%endblock%}

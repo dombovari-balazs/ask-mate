@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
 <h1>Sign In</h1>
     {% from 'macros/_renderfield.html' import render_form_field, logged_hidden_class %}
     <form action="" method="post" novalidate>
@@ -19,5 +14,4 @@
         <p>{{ render_form_field(form.submit) }}</p>
         <span class="login-error-message {{ login_error_class }}">Wrong username or password!</span>
     </form>
-</body>
-</html>
+{%endblock%}

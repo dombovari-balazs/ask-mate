@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
 <h1>Register</h1>
     {% from 'macros/_renderfield.html' import render_form_field %}
     <form action="" method="post">
@@ -20,5 +16,4 @@
         </div>
         <p>{{ form.submit() }}</p>
     </form>
-</body>
-</html>
+{%endblock%}

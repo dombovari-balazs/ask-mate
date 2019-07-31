@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AskMate</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-grid.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-reboot.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+
+
+  <script src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/bootstrap.bundle.js') }}"></script>
+
+    </head>
+    <body>
+    {% from 'macros/_renderfield.html' import logged_hidden_class, not_logged_hidden_class %}
+    <nav class="navbar navbar-expand-md sticky-top bg-light">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <div class="navbar-nav mr-auto">
+            <a href="{{url_for('route_main') }}">
+                    <img height="80" alt="AskMate" src="{{ url_for('static',filename='images/askmate_logo.png')}}"
+            </a>
+        </div>
+    </div>
+
+    <div class="mx-auto">
+        <a class="navbar-brand mx-auto" href="#"></a>
+    </div> <! Spooky staff! Do NOT disturb!>
+
+	<form class="navbar-brand mx-auto order-0" action="{{ url_for('search_question') }}"  method="get">
+            <input class="form-control-lg" name="q" type="text" placeholder="Search">
+    </form>
+
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="{{ logged_hidden_class() }} nav-link" href="{{ url_for('route_register') }}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ not_logged_hidden_class()}}  nav-link " href="{{ url_for('route_logout') }}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ logged_hidden_class() }} nav-link" href="{{ url_for('route_login') }}">Login</a>
+            </li>
+
+            <li class="nav-item">
+                {%if session['user_id'] is not none%}
+                <a class="{{ not_logged_hidden_class() }}  nav-link" href="{{ url_for('user_page', user_id=session['user_id']) }}">User Page</a>
+                {%endif%}
+            </li>
+            <li class="nav-item">
+                <a class="{{ not_logged_hidden_class() }}   nav-link" href="{{ url_for('route_list_users') }}">List all users</a>
+
+            </li>
+
+            <li class="nav-item">
+                <p class="{{ not_logged_hidden_class()}}  nav-link">Logged in as {{ session['user_name'] }}</p>
+            </li>
+        </ul>
+    </div>
+</nav>
+        <div  class="container">
+            <div class="content-wrapper">
+            {% block content %} {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>
+
+

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta charset="UTF-8">
-    <title>Editing</title>
-<h1>{{ question['title'] }}</h1>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
+
+
 <form action="{{ url_for('edit', question_id=question['id']) }}" method="post">
     <textarea name="edit_q" rows="16" cols="50" >{{ question["message"] }}</textarea>
     <button type="submit">Edit</button>
 </form>
-</body>
-</html>
+{%endblock%}

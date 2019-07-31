@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta charset="UTF-8">
-    <title>Edit comment</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
+
+
 <h3>Edit comment</h3>
 <form action="{{ url_for('edit_comment', comment_id=comment['id']) }}" method="post">
     <textarea name="message" cols="30" rows="10">{{ comment['message'] }}</textarea>
     <button type="submit">Submit</button>
 </form>
-</body>
-</html>
+
+{%endblock%}

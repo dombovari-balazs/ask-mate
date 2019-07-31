@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<title>HomePAge</title>
-</head>
-<body>
-	<h1>AskMate</h1>
-    <h2>Logged in as {{ user }}</h2>
-    {% with messages = get_flashed_messages(with_categories=true) %}
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
             {% if category == 'logged-in-error' %}
@@ -18,41 +13,66 @@
         {% endfor %}
     {% endif %}
     {% endwith %}
-    {% from 'macros/_renderfield.html' import logged_hidden_class, not_logged_hidden_class %}
-    <a class="{{ logged_hidden_class() }}" href="{{ url_for('route_register') }}">Register</a>
-    <a class="{{ logged_hidden_class() }}" href="{{ url_for('route_login') }}">Login</a>
-    <a class="{{ not_logged_hidden_class() }}" href="{{ url_for('route_logout') }}">Logout</a>
-    <div class="searchbar">
-    <form action="{{ url_for('search_question') }}" method="get">
-        <textarea name="q" id="" cols="16" rows="1,5"></textarea>
-        <button class="button1" type="submit">Search</button>
-    </form>
-    </div>
-    <a href="{{ url_for('route_add_question') }}"><button class="button1" type="button">Ask a question</button></a>
-	<table class ="center">
-		<tr>
-		<th>Id</th>
-		<th>Date</th>
-		<th>Views</th>
-		<th>Votes</th>
-		<th>Title</th>
-		</tr>
-		<tbody>
-		{% for question in questions %}
-        <tr>
-			<td>{{ question["id"] }}</td>
-			<td>{{ question["submission_time"] }}</td>
-			<td>{{ question["view_number"] }}</td>
-			<td>{{ question["vote_number"] }}</td>
-			<td><a href="{{ url_for('display_question', question_id=question['id']) }}">{{ question["title"] }}</a></td>
-        </tr>
-		{% endfor %}
 
-		</tbody>
-	</table>
-    <a href="{{ url_for('route_main') }}"><button type="button">List latest questions</button></a>
-    <a href="{{ url_for('route_list') }}"><button type="button">List all questions</button></a>
-	<a href="{{ url_for('upload_image') }}"><button type="button">Upload image</button></a>
 
-</body>
-</html>
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-md-12">
+            <div class="row">
+		<div class="col-md-10">
+			<div class="page-header">
+				<h1>
+					Top Questions
+				</h1>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<a  class="{{ not_logged_hidden_class() }}"  href="{{ url_for('route_add_question') }}"><button class="btn btn-success" type="button">Ask a question</button></a>
+
+		</div>
+
+        </div>
+            <hr>
+            </div>
+        </div>
+	</div>
+
+
+{% for question in questions %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="btn-group" role="group">
+
+						<button class="btn btn-outline-warning" type="button">
+							Vote<br>{{ question["vote_number"] }}
+						</button>
+						<button class="btn btn-outline-success" type="button">
+							Views<br>{{ question["view_number"] }}
+						</button>
+						<button class="btn btn-outline-info" type="button">
+							Asked at:<br>{{ question["submission_time"] }}
+						</button>
+
+					</div>
+				</div>
+				<div class="col-md-8">
+					<h3>
+						<a href="{{ url_for('display_question', question_id=question['id']) }}">{{ question["title"] }}</a>
+					</h3>
+
+				</div>
+
+			</div>
+            <hr>
+		</div>
+	</div>
+{% endfor %}
+    <a href="{{ url_for('route_main') }}"><button class="btn btn-secondary" type="button">List latest questions</button></a>
+    <a href="{{ url_for('route_list') }}"><button class="btn btn-secondary" type="button">List all questions</button></a>
+
+</div>
+
+
+{%endblock%}

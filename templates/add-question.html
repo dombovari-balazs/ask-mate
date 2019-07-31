@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <Title>New question</Title>
+{% extends "layout.html" %}
 
-    </head>
-    <h1>Ask new question</h1>
-    <body>
+{% block content %}
+
+
         <form method="post">
             <label for="new_question">New question: </label>
             <p><input id="new_question" name="title"></p>
@@ -14,5 +10,6 @@
             <p><textarea id="details" rows="8" cols="50" name="details"></textarea></p>
             <button class="button1" type="submit">submit question</button>
         </form>
-    </body>
-</html>
+
+
+{%endblock%}

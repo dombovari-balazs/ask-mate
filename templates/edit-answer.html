@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta charset="UTF-8">
-    <title>Edit Answer</title>
-</head>
-<h2>Edit Answer</h2>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
+
+
     <form action="{{ url_for('edit_answer', question_id=question['id'], answer_id=answer['id']) }}" method="post">
         <h2>ID:</h2>
         <p>{{ answer['id'] }}</p>
@@ -15,5 +11,5 @@
         <textarea name="edit_a" rows="8" cols="50">{{ answer['message'] }}</textarea>
         <button type="submit" value="edit">Edit answer</button>
     </form>
-</body>
-</html>
+
+{%endblock%}
